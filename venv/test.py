@@ -1,5 +1,10 @@
 import numpy as np
-m = np.array([[1,2,3],[2,3,4]])
+m = np.array([[.4, .6],[.5,.5]])
+m = m.T
 print(m)
-a = np.linalg.solve([[1,2,3],[1,0,0],[0,2,2]], [1,1,1])
-print(a)
+m[0][0] = m[0][0] - 1
+m[len(m) - 1] = [1 for x in m]
+print(m)
+coeficientes = np.linalg.solve(m, [0, 1])
+solucion = np.dot(coeficientes, [60, 0])
+print(solucion)

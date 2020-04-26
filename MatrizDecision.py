@@ -1,6 +1,5 @@
 from typing import List
 from Functions import check_float, confirmacion
-import numpy as np
 
 
 class MatrizDecision:
@@ -9,6 +8,17 @@ class MatrizDecision:
         self.estados = estados
         self.matriz = []
         self.costos = {}
+
+    def get_costo(self, i: int) -> float:
+        while True:
+            costo = input(f'Ingrese el costo C{i}{self.k}: ')
+            costo = check_float(costo)
+            if costo is None:
+                print('Valor inválido, intente de nuevo...')
+                continue
+            else:
+                break
+        return costo
 
     def set_matriz(self, m: int) -> None:
         for i in self.estados:
@@ -23,7 +33,7 @@ class MatrizDecision:
                             break
                         else:
                             print('Valor inválido, intente de nuevo...')
-                costo = input(f'Ingrese el costo C{i}{self.k}: ')
+                costo = self.get_costo(i)
                 print(f'Los valores ingresados para el estado {i} son: {row}')
                 print(f'El costo ingresado es: {costo}')
                 if confirmacion():
