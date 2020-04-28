@@ -1,17 +1,20 @@
-from typing import List
+from typing import List, Dict
 from MatrizDecision import MatrizDecision
 from Functions import check_int
 
 
 class PMD:
-    def __init__(self, m: int, k: int):
+    def __init__(self, m: int, k: int, matrices_decision: Dict = None):
         self.m = m
         self.k = k
-        self.matrices_decision = {}
         self.politicas = []
-        self.set__all_matrices()
+        if matrices_decision:
+            self.matrices_decision = matrices_decision
+        else:
+            self.matrices_decision = {}
+            self.set_all_matrices()
 
-    def set__all_matrices(self) -> None:
+    def set_all_matrices(self) -> None:
         for k in range(1, self.k + 1):
             self.matriz_decision_k(k)
 
@@ -37,5 +40,3 @@ class PMD:
         matriz_k = MatrizDecision(k, disponible)
         matriz_k.set_matriz(self.m)
         self.matrices_decision[k] = matriz_k
-
-

@@ -1,11 +1,11 @@
 from PMD import PMD
-from typing import List
+from typing import List, Dict
 from Sistema_de_ecuaciones import SistemaDeEcuaciones
 
 
 class PMDExahustivo(PMD):
-    def __init__(self, m: int, k: int):
-        super().__init__(m, k)
+    def __init__(self, m: int, k: int, matrices_decision: Dict = {}):
+        super().__init__(m, k, matrices_decision)
         self.matrices_de_politica = {}
 
     def generar_politicas(self) -> None:
@@ -46,7 +46,7 @@ class PMDExahustivo(PMD):
         sistema_ecuaciones.resolver_sistema()
         return sistema_ecuaciones.solucion
 
-    def get_mejor_politica(self):
+    def get_mejor_politica(self) -> Dict:
         mejor = {'costo': ''}
         for i, nombre in enumerate(self.matrices_de_politica):
             if mejor['costo'] == "" or mejor['costo'] > self.matrices_de_politica[nombre]['costo_esperado']:
@@ -55,9 +55,13 @@ class PMDExahustivo(PMD):
                 mejor['nombre'] = nombre
         return mejor
 
+    def resolver(self) -> Dict:
+        self.generar_politicas()
+        self.fill_matrices_de_politica()
+        return self.get_mejor_politica()
 
-pmd = PMDExahustivo(3, 3)
-pmd.generar_politicas()
-print(pmd.politicas)
-pmd.fill_matrices_de_politica()
-print(pmd.get_mejor_politica())
+# pmd = PMDExahustivo(3, 3)
+# pmd.generar_politicas()
+# print(pmd.politicas)
+# pmd.fill_matrices_de_politica()
+# print(pmd.get_mejor_politica())

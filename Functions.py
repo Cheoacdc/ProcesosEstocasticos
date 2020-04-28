@@ -1,4 +1,4 @@
-def check_int(num: str):
+def check_int(num: str) -> int or None:
     try:
         result = int(num)
     except ValueError:
@@ -6,7 +6,7 @@ def check_int(num: str):
     return result
 
 
-def check_float(flt: str):
+def check_float(flt: str) -> float or None:
     if '/' in flt:
         helper = []
         nums = flt.split('/')
@@ -26,9 +26,9 @@ def check_float(flt: str):
     return number
 
 
-def confirmacion():
+def confirmacion(msg: str = '¿Desea continuar?') -> bool:
     while True:
-        respuesta = input('¿Desea continuar? (Si/No): ')
+        respuesta = input(f'{msg} (Si/No): ')
         if respuesta.lower() == 'si' or respuesta == '':
             return True
         elif respuesta.lower() == 'no':
