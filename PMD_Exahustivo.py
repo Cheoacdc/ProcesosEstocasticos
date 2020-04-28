@@ -4,7 +4,7 @@ from Sistema_de_ecuaciones import SistemaDeEcuaciones
 
 
 class PMDExahustivo(PMD):
-    def __init__(self, m: int, k: int, matrices_decision: Dict = {}):
+    def __init__(self, m: int, k: int, matrices_decision: Dict = None):
         super().__init__(m, k, matrices_decision)
         self.matrices_de_politica = {}
 
