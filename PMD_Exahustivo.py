@@ -59,9 +59,3 @@ class PMDExahustivo(PMD):
         self.generar_politicas()
         self.fill_matrices_de_politica()
         return self.get_mejor_politica()
-
-# pmd = PMDExahustivo(3, 3)
-# pmd.generar_politicas()
-# print(pmd.politicas)
-# pmd.fill_matrices_de_politica()
-# print(pmd.get_mejor_politica())

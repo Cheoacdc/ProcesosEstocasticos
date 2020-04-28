@@ -27,6 +27,7 @@ class Menu:
                 break
         return str(opc)
 
+    @classmethod
     def mostrar_solucion(cls, solucion: Dict):
         print(f'Se determinó que la mejor política fue: {solucion["politica"]}')
         print(f'El costo esperado al aplicar dicha politica es: {solucion["costo"]}')
