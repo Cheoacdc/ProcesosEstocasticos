@@ -1,5 +1,5 @@
 from typing import List
-from Functions import check_float, confirmacion
+from utils.Functions import check_float, confirmacion
 
 
 class MatrizDecision:

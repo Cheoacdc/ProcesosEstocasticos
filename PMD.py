@@ -1,6 +1,6 @@
 from typing import List, Dict
 from MatrizDecision import MatrizDecision
-from Functions import check_int
+from utils.Functions import check_int
 
 
 class PMD:

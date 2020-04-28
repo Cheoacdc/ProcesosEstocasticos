@@ -1,6 +1,7 @@
 from PMD import PMD
-from PMD_Exahustivo import PMDExahustivo
-from Functions import check_int, confirmacion
+from Metodos.PMD_Exahustivo import PMDExahustivo
+from Metodos.Prog_Lineal import ProgLineal
+from utils.Functions import check_int, confirmacion
 from typing import Dict
 
 
@@ -8,7 +9,8 @@ class Menu:
     def __init__(self, problema: PMD):
         self.problema = problema
         self.metodos = {
-            '1': PMDExahustivo
+            '1': PMDExahustivo,
+            '2': ProgLineal
         }
 
     @classmethod
