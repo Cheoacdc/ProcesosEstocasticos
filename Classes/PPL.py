@@ -47,5 +47,3 @@ class PPL:
         sol = minimize(self.objective, self.x0, args=self.costos,
                        method='SLSQP', bounds=self.bounds, constraints=self.constraints)
         return sol
-
-

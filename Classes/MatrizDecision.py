@@ -33,6 +33,9 @@ class MatrizDecision:
                             break
                         else:
                             print('Valor inválido, intente de nuevo...')
+                if not sum(row) == 1:
+                    print('La suma de probabilidades debe ser igual a 1')
+                    continue
                 costo = self.get_costo(i)
                 print(f'Los valores ingresados para el estado {i} son: {row}')
                 print(f'El costo ingresado es: {costo}')

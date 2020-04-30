@@ -1,7 +1,7 @@
-from PMD import PMD
+from Classes.PMD import PMD
 from typing import List, Dict
 from utils.Functions import check_int, check_index
-from Sistema_de_ecuaciones import SistemaDeEcuaciones
+from Classes.Sistema_de_ecuaciones import SistemaDeEcuaciones
 import numpy as np
 
 
@@ -44,7 +44,7 @@ class MejoramientoPoliticas(PMD):
         if initial is None:
             result = [1]
         else:
-            result = initial
+            result = [val for val in initial]
         if not k:
             k = self.politica[i]
 
@@ -53,9 +53,9 @@ class MejoramientoPoliticas(PMD):
             p = self.matrices_decision[k].matriz[e][j]
             result.append(-p)
 
-        if initial:
+        if initial is not None:
             if not i == self.m:
-                result[i] += 1
+                result[i + len(initial)] += 1
         else:
             if not i == self.m:
                 result[i + 1] += 1

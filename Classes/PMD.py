@@ -1,7 +1,7 @@
 from typing import List, Dict
-from MatrizDecision import MatrizDecision
-from Sistema_de_ecuaciones import SistemaDeEcuaciones
-from utils.Functions import check_int
+from Classes.MatrizDecision import MatrizDecision
+from Classes.Sistema_de_ecuaciones import SistemaDeEcuaciones
+from utils.Functions import check_int, confirmacion
 
 
 class PMD:
@@ -24,17 +24,20 @@ class PMD:
         while True:
             n = input(f'Seleccione el número de estados posibles para la decisión k = {k}: ')
             n = check_int(n)
-            if n is not None and n is not 0 and n < self.m + 2:
-                break
-            else:
+            if n is None or not 0 < n < self.m + 2:
                 print(f'Ingrese un número entero entre 1 y {self.m + 1}...')
-        if n == self.m + 1:
-            return [x for x in range(0, self.m + 1)]
-        disponible = []
-        print('Ahora, ingrese los estados posibles: ')
-        while len(disponible) < n:
-            e = int(input('Estado disponible: '))
-            disponible.append(e)
+            elif confirmacion('¿Los datos ingresados son correctos?'):
+                break
+        while True:
+            if n == self.m + 1:
+                return [x for x in range(0, self.m + 1)]
+            disponible = []
+            print('Ahora, ingrese los estados posibles: ')
+            while len(disponible) < n:
+                e = int(input('Estado disponible: '))
+                disponible.append(e)
+            if confirmacion('¿Los datos ingresados son correctos?'):
+                break
         return disponible
 
     def matriz_decision_k(self, k: int) -> None:

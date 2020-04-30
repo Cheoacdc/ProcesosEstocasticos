@@ -1,7 +1,7 @@
-from PMD import PMD
+from Classes.PMD import PMD
 from Metodos.PMD_Exahustivo import PMDExahustivo
 from Metodos.Prog_Lineal import ProgLineal
-from Metodos.Mejoramiento_Politicas import MejoramientoPoliticas
+from Metodos.Mejoramiento_Politicas_Descuento import MejoramientoPoliticas, MejoramientoPoliticasDescuento
 from utils.Functions import check_int, confirmacion
 from typing import Dict
 
@@ -12,7 +12,8 @@ class Menu:
         self.metodos = {
             '1': PMDExahustivo,
             '2': ProgLineal,
-            '3': MejoramientoPoliticas
+            '3': MejoramientoPoliticas,
+            '4': MejoramientoPoliticasDescuento
         }
 
     @classmethod

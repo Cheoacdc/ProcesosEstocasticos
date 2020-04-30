@@ -1,4 +1,4 @@
-from PMD import PMD
+from Classes.PMD import PMD
 from typing import List, Dict
 from utils.Functions import confirmacion
 

@@ -1,8 +1,8 @@
-from PMD import PMD
+from Classes.PMD import PMD
 from typing import List, Dict
 from utils.Functions import check_index
 import numpy as np
-from utils.PPL import PPL
+from Classes.PPL import PPL
 
 
 class ProgLineal(PMD):

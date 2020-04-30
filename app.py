@@ -1,5 +1,5 @@
-from PMD import PMD
-from Menu import Menu
+from Classes.PMD import PMD
+from Classes.Menu import Menu
 from utils.Functions import check_int
 
 
@@ -20,8 +20,10 @@ def set_problema() -> PMD:
 def get_param(param) -> int:
     while True:
         val = check_int(input(f'¿Cuál es el valor de {param}?: '))
-        if val is not None:
+        if val is not None and val > 0:
             break
+        else:
+            print('Ingrese un número entero mayor a cero...')
     return val
 
 
