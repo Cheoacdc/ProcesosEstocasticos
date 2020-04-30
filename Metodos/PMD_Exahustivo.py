@@ -1,6 +1,6 @@
 from PMD import PMD
 from typing import List, Dict
-from Sistema_de_ecuaciones import SistemaDeEcuaciones
+from utils.Functions import confirmacion
 
 
 class PMDExahustivo(PMD):
@@ -28,23 +28,11 @@ class PMDExahustivo(PMD):
         for i, politica in enumerate(self.politicas):
             self.set_matriz_de_politica(politica, i)
 
-    def set_matriz_de_politica(self, politica: List, num: int = None):
-        matriz = []
-        costos = []
-        for e, k in enumerate(politica):
-            mat_k = self.matrices_decision[k]
-            index = mat_k.estados.index(e)
-            row = [val for val in mat_k.matriz[index]]
-            matriz.append(row)
-            costo = mat_k.costos[f'c{e}{k}']
-            costos.append(costo)
-        costo_esperado = self.costo_esperado(matriz, costos)
-        self.matrices_de_politica[f'R{num}'] = {'matriz': matriz, 'costo_esperado': costo_esperado, 'politica': politica}
-
-    def costo_esperado(self, matriz: List, costos: List):
-        sistema_ecuaciones = SistemaDeEcuaciones(matriz, costos, self.m)
-        sistema_ecuaciones.resolver_sistema()
-        return sistema_ecuaciones.solucion
+    def set_matriz_de_politica(self, politica: List, num: int):
+        resultado = self.evaluar_politica(politica)
+        matriz = resultado['matriz']
+        costo = resultado['costo']
+        self.matrices_de_politica[f'R{num}'] = {'matriz': matriz, 'costo_esperado': costo, 'politica': politica}
 
     def get_mejor_politica(self) -> Dict:
         mejor = {'costo': ''}
@@ -55,7 +43,18 @@ class PMDExahustivo(PMD):
                 mejor['nombre'] = nombre
         return mejor
 
+    def mostrar_politicas(self):
+        print('Se generaron las siguientes posibles políticas:')
+        for politica in self.matrices_de_politica:
+            print(f'\tPolitica: {self.matrices_de_politica[politica]["politica"]}')
+            print('\tMatriz: ')
+            for row in self.matrices_de_politica[politica]["matriz"]:
+                print(f'\t\t{row}')
+            print(f'\tCosto esperado: {self.matrices_de_politica[politica]["costo_esperado"]}\n')
+
     def resolver(self) -> Dict:
         self.generar_politicas()
         self.fill_matrices_de_politica()
+        if confirmacion('¿Desea mostrar cada política generada?'):
+            self.mostrar_politicas()
         return self.get_mejor_politica()

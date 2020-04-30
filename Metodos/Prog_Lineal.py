@@ -9,15 +9,9 @@ class ProgLineal(PMD):
     def __init__(self, m: int, k: int, matrices_decision: Dict = None):
         super().__init__(m, k, matrices_decision)
         self.matriz_de_coeficientes = []
-        self.costos = {}
         self.variables = []
         self.get_costos()
         self.set_variables()
-
-    def get_costos(self):
-        for i in self.matrices_decision:
-            for costo in self.matrices_decision[i].costos:
-                self.costos[costo] = self.matrices_decision[i].costos[costo]
 
     def set_variables(self):
         for costo in self.costos:
@@ -63,10 +57,12 @@ class ProgLineal(PMD):
         return ppl.solve()
 
     def get_politica(self, sol) -> List:
+        print('Al optimizar, se obtiene: ')
         politica = [None for x in range(0, self.m + 1)]
         for i, val in enumerate(sol.x):
             if val > .0001:
                 y = self.variables[i]
+                print(f'\t{y} = {val}')
                 e = int(y[1])
                 k = int(y[2])
                 politica[e] = k
@@ -75,6 +71,7 @@ class ProgLineal(PMD):
     def resolver(self):
         sol = self.minimizar()
         if sol.success:
+
             politica = self.get_politica(sol)
             return {'costo': sol.fun, 'politica': politica}
         else:
