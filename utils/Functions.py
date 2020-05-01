@@ -37,6 +37,25 @@ def check_index(element: str or int or float, lista: List) -> int or None:
     return result
 
 
+def get_alpha() -> float:
+    while True:
+        alpha = check_float(input('Ingrese el valor de alpha(descuento): '))
+        if alpha is not None and 0 < alpha < 1:
+            break
+        print('Ingrese un valor en el siguiente intervalo: (0, 1)')
+    return alpha
+
+
+def get_param(param, fun: str = 'int') -> int:
+    while True:
+        val = func_switcher[fun](input(f'¿Cuál es el valor de {param}?: '))
+        if val is not None and val > 0:
+            break
+        else:
+            print('Ingrese un número entero mayor a cero...')
+    return val
+
+
 def confirmacion(msg: str = '¿Desea continuar?') -> bool:
     while True:
         respuesta = input(f'{msg} (Si/No): ')
@@ -47,3 +66,9 @@ def confirmacion(msg: str = '¿Desea continuar?') -> bool:
         else:
             print('Ingrese una opción aceptada...')
             continue
+
+
+func_switcher = {
+    'int': check_int,
+    'float': check_float
+}

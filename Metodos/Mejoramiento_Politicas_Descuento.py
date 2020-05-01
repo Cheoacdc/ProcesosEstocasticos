@@ -1,23 +1,14 @@
 from typing import Dict, List
 from Metodos.Mejoramiento_Politicas import MejoramientoPoliticas
 from Classes.Sistema_de_ecuaciones import SistemaDeEcuaciones
-from utils.Functions import check_float
+from utils.Functions import get_alpha
 
 
 class MejoramientoPoliticasDescuento(MejoramientoPoliticas):
     def __init__(self, m: int, k: int, matrices_decision: Dict = None):
         super().__init__(m, k, matrices_decision)
         self.variables.append({'name': f'V{self.m}', 'value': 0})
-        self.alpha = self.get_alpha()
-
-    @classmethod
-    def get_alpha(cls) -> float:
-        while True:
-            alpha = check_float(input('Ingrese el valor de alpha(descuento): '))
-            if alpha is not None and 0 < alpha < 1:
-                break
-            print('Ingrese un valor en el siguiente intervalo: (0, 1)')
-        return alpha
+        self.alpha = get_alpha()
 
     def get_row(self, i: int, k: int = None, initial: List = None) -> List:
         if initial is None:
@@ -46,17 +37,3 @@ class MejoramientoPoliticasDescuento(MejoramientoPoliticas):
         coeficientes = sistema.coeficientes_variables
         for i, var in enumerate(self.variables):
             var['value'] = coeficientes[i]
-
-    def resolver(self):
-        self.get_politica_arbitraria()
-        self.set_matriz()
-        while True:
-            self.resolver_matriz()
-            n_politica = self.mejoramiento_politicas()
-            if n_politica == self.politica:
-                break
-            else:
-                self.politica = n_politica
-                print(f'\tLa nueva politica es {self.politica}')
-        costo = self.evaluar_politica(self.politica)['costo']
-        return {'costo': costo, 'politica': self.politica}

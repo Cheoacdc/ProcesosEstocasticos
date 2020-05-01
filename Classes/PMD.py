@@ -1,7 +1,7 @@
 from typing import List, Dict
 from Classes.MatrizDecision import MatrizDecision
 from Classes.Sistema_de_ecuaciones import SistemaDeEcuaciones
-from utils.Functions import check_int, confirmacion
+from utils.Functions import check_int, confirmacion, check_index
 
 
 class PMD:
@@ -46,10 +46,23 @@ class PMD:
         matriz_k.set_matriz(self.m)
         self.matrices_decision[k] = matriz_k
 
+    def posibles_k_para_e(self, e: int) -> List:
+        ks = []
+        for k in range(1, self.k + 1):
+            if check_index(e, self.matrices_decision[k].estados) is not None:
+                ks.append(k)
+        return ks
+
     def get_costos(self):
         for i in self.matrices_decision:
             for costo in self.matrices_decision[i].costos:
                 self.costos[costo] = self.matrices_decision[i].costos[costo]
+
+    def get_matriz_de_politica(self, politica: List) -> Dict:
+        resultado = self.evaluar_politica(politica)
+        matriz = resultado['matriz']
+        costo = resultado['costo']
+        return {'matriz': matriz, 'costo_esperado': costo, 'politica': politica}
 
     def evaluar_politica(self, politica: List) -> Dict:
         matriz = []

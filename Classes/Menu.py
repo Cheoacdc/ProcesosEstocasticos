@@ -2,6 +2,7 @@ from Classes.PMD import PMD
 from Metodos.PMD_Exahustivo import PMDExahustivo
 from Metodos.Prog_Lineal import ProgLineal
 from Metodos.Mejoramiento_Politicas_Descuento import MejoramientoPoliticas, MejoramientoPoliticasDescuento
+from Metodos.Aproximaciones_Sucesivas import AproximacionesSucesivas
 from utils.Functions import check_int, confirmacion
 from typing import Dict
 
@@ -13,12 +14,13 @@ class Menu:
             '1': PMDExahustivo,
             '2': ProgLineal,
             '3': MejoramientoPoliticas,
-            '4': MejoramientoPoliticasDescuento
+            '4': MejoramientoPoliticasDescuento,
+            '5': AproximacionesSucesivas
         }
 
     @classmethod
     def get_opcion(cls) -> str:
-        print('Seleccione el método que desea emplear para resolver el problema:')
+        print('\nSeleccione el método que desea emplear para resolver el problema:')
         print('\t1) Enumeración exahustiva de políticas')
         print('\t2) Solución por programación lineal')
         print('\t3) Método de mejoramiento de políticas')

@@ -29,13 +29,6 @@ class MejoramientoPoliticas(PMD):
             print(f'Las posibles k para el estado {e} son: ', ks)
         return k
 
-    def posibles_k_para_e(self, e: int):
-        ks = []
-        for k in range(1, self.k + 1):
-            if check_index(e, self.matrices_decision[k].estados) is not None:
-                ks.append(k)
-        return ks
-
     def set_matriz(self):
         for i in range(0, self.m + 1):
             self.matriz_politica.append(self.get_row(i))

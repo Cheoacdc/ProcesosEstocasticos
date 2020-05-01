@@ -26,13 +26,7 @@ class PMDExahustivo(PMD):
 
     def fill_matrices_de_politica(self):
         for i, politica in enumerate(self.politicas):
-            self.set_matriz_de_politica(politica, i)
-
-    def set_matriz_de_politica(self, politica: List, num: int):
-        resultado = self.evaluar_politica(politica)
-        matriz = resultado['matriz']
-        costo = resultado['costo']
-        self.matrices_de_politica[f'R{num}'] = {'matriz': matriz, 'costo_esperado': costo, 'politica': politica}
+            self.matrices_de_politica[f'R{i}'] = self.get_matriz_de_politica(politica)
 
     def get_mejor_politica(self) -> Dict:
         mejor = {'costo': ''}
