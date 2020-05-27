@@ -12,6 +12,17 @@ class ProgLineal(PMD):
         self.variables = []
         self.get_costos()
         self.set_variables()
+        self.tipo_ppl = self.get_tipo_ppl()
+        self.signo = 1 if self.tipo_ppl == 'min' else -1
+
+    @classmethod
+    def get_tipo_ppl(cls) -> str:
+        while True:
+            tipo_ppl = input('¿Desea maximizar o minimizar? (max/min): ').lower()
+            if tipo_ppl not in ('max', 'min'):
+                print('Ingrese una opción válida...')
+                continue
+            return tipo_ppl
 
     def set_variables(self):
         for costo in self.costos:
@@ -52,7 +63,7 @@ class ProgLineal(PMD):
 
     def minimizar(self):
         self.fill_matriz_coeficientes()
-        costos = [self.costos[costo] for costo in self.costos]
+        costos = [self.signo * self.costos[costo] for costo in self.costos]
         ppl = PPL(costos, self.matriz_de_coeficientes)
         return ppl.solve()
 
@@ -73,6 +84,6 @@ class ProgLineal(PMD):
         if sol.success:
 
             politica = self.get_politica(sol)
-            return {'costo': sol.fun, 'politica': politica}
+            return {'costo': self.signo * sol.fun, 'politica': politica}
         else:
             return {'costo': sol.message, 'politica': 'Hubo un error en el proceso de optimización'}

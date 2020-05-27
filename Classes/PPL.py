@@ -4,7 +4,7 @@ from scipy.optimize import minimize
 
 
 class PPL:
-    def __init__(self, costos: List, coeficientes: List):
+    def __init__(self, costos: List, coeficientes: List[List]):
         self.costos = costos
         self.coeficientes = coeficientes
         self.n = len(costos)

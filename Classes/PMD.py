@@ -38,6 +38,7 @@ class PMD:
                 disponible.append(e)
             if confirmacion('¿Los datos ingresados son correctos?'):
                 break
+        disponible.sort()
         return disponible
 
     def matriz_decision_k(self, k: int) -> None:
