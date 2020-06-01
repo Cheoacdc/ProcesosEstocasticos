@@ -33,7 +33,8 @@ class MatrizDecision:
                             break
                         else:
                             print('Valor inválido, intente de nuevo...')
-                if not sum(row) == 1:
+                suma = sum(row)
+                if not .999999 < suma < 1.000001:
                     print('La suma de probabilidades debe ser igual a 1')
                     continue
                 costo = self.get_costo(i)
