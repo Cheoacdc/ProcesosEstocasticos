@@ -3,7 +3,7 @@ from Metodos.PMD_Exahustivo import PMDExahustivo
 from Metodos.Prog_Lineal import ProgLineal
 from Metodos.Mejoramiento_Politicas_Descuento import MejoramientoPoliticas, MejoramientoPoliticasDescuento
 from Metodos.Aproximaciones_Sucesivas import AproximacionesSucesivas
-from utils.Functions import check_int, confirmacion
+from utils.Functions import check_int, confirmacion, clear_screen
 from typing import Dict
 
 
@@ -20,7 +20,8 @@ class Menu:
 
     @classmethod
     def get_opcion(cls) -> str:
-        print('\nSeleccione el método que desea emplear para resolver el problema:')
+        clear_screen()
+        print('Seleccione el método que desea emplear para resolver el problema:')
         print('\t1) Enumeración exahustiva de políticas')
         print('\t2) Solución por programación lineal')
         print('\t3) Método de mejoramiento de políticas')
@@ -36,8 +37,8 @@ class Menu:
 
     @classmethod
     def mostrar_solucion(cls, solucion: Dict):
-        print(f'Se determinó que la mejor política fue: {solucion["politica"]}')
-        print(f'El costo esperado al aplicar dicha politica es: {solucion["costo"]}')
+        print(f'-> Se determinó que la mejor política fue: {solucion["politica"]}')
+        print(f'-> El costo esperado al aplicar dicha politica es: {solucion["costo"]}')
 
     def start(self):
         while True:

@@ -1,4 +1,6 @@
 from typing import List
+import os
+import sys
 
 
 def check_int(num: str) -> int or None:
@@ -66,6 +68,13 @@ def confirmacion(msg: str = '¿Desea continuar?') -> bool:
         else:
             print('Ingrese una opción aceptada...')
             continue
+
+
+def clear_screen():
+    if sys.platform[:3] == 'win':
+        os.system('cls')
+    if sys.platform[:5] == 'linux' or sys.platform[:6] == 'darwin':
+        os.system('clear')
 
 
 func_switcher = {

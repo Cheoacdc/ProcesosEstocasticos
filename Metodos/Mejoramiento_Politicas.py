@@ -20,12 +20,13 @@ class MejoramientoPoliticas(PMD):
             self.politica.append(self.get_k(len(self.politica)))
 
     def get_k(self, e: int):
+        ks = self.posibles_k_para_e(e)
         while True:
             k = check_int(input(f'Ingrese k para el estado {e}: '))
-            if k is not None and k > 0 and check_index(e, self.matrices_decision[k].estados) is not None:
+            if (k is not None and (k in ks) 
+            and check_index(e, self.matrices_decision[k].estados) is not None):
                 break
             print('Opción inválida, intente de nuevo...')
-            ks = self.posibles_k_para_e(e)
             print(f'Las posibles k para el estado {e} son: ', ks)
         return k
 
