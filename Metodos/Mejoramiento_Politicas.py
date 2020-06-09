@@ -6,8 +6,8 @@ import numpy as np
 
 
 class MejoramientoPoliticas(PMD):
-    def __init__(self, m: int, k: int, matrices_decision: Dict = None):
-        super().__init__(m, k, matrices_decision)
+    def __init__(self, m: int, k: int, matrices_decision: Dict = None, tipo: str = 'min'):
+        super().__init__(m, k, matrices_decision, tipo)
         self.matriz_de_coeficientes = []
         self.variables = [{'name': f'V{i}', 'value': 0} for i in range(0, self.m)]
         self.get_costos()
@@ -30,7 +30,9 @@ class MejoramientoPoliticas(PMD):
             print(f'Las posibles k para el estado {e} son: ', ks)
         return k
 
-    def set_matriz(self):
+    def set_matriz(self, new: bool = False):
+        if new:
+            self.matriz_politica = []
         for i in range(0, self.m + 1):
             self.matriz_politica.append(self.get_row(i))
 
@@ -102,5 +104,6 @@ class MejoramientoPoliticas(PMD):
             else:
                 self.politica = n_politica
                 print(f'\tLa nueva politica es {self.politica}')
+                self.set_matriz(new=True)
         costo = self.evaluar_politica(self.politica)['costo']
         return {'costo': costo, 'politica': self.politica}

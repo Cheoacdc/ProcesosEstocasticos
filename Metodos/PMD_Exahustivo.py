@@ -4,8 +4,8 @@ from utils.Functions import confirmacion
 
 
 class PMDExahustivo(PMD):
-    def __init__(self, m: int, k: int, matrices_decision: Dict = None):
-        super().__init__(m, k, matrices_decision)
+    def __init__(self, m: int, k: int, matrices_decision: Dict = None, tipo: str = 'min'):
+        super().__init__(m, k, matrices_decision, tipo)
         self.matrices_de_politica = {}
 
     def generar_politicas(self) -> None:
@@ -44,7 +44,9 @@ class PMDExahustivo(PMD):
             print('\tMatriz: ')
             for row in self.matrices_de_politica[politica]["matriz"]:
                 print(f'\t\t{row}')
-            print(f'\tCosto esperado: {self.matrices_de_politica[politica]["costo_esperado"]}\n')
+            signo = 1 if self.tipo == 'min' else -1
+            costo = signo * self.matrices_de_politica[politica]["costo_esperado"]
+            print(f'\tCosto esperado: {costo}\n')
 
     def resolver(self) -> Dict:
         self.generar_politicas()

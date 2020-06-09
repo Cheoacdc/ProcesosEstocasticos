@@ -5,8 +5,8 @@ from utils.Functions import get_alpha
 
 
 class MejoramientoPoliticasDescuento(MejoramientoPoliticas):
-    def __init__(self, m: int, k: int, matrices_decision: Dict = None):
-        super().__init__(m, k, matrices_decision)
+    def __init__(self, m: int, k: int, matrices_decision: Dict = None, tipo: str = 'min'):
+        super().__init__(m, k, matrices_decision, tipo)
         self.variables.append({'name': f'V{self.m}', 'value': 0})
         self.alpha = get_alpha()
 

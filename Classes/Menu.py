@@ -35,15 +35,16 @@ class Menu:
                 break
         return str(opc)
 
-    @classmethod
-    def mostrar_solucion(cls, solucion: Dict):
+    def mostrar_solucion(self, solucion: Dict):
         print(f'-> Se determinó que la mejor política fue: {solucion["politica"]}')
-        print(f'-> El costo esperado al aplicar dicha politica es: {solucion["costo"]}')
+        costo = solucion["costo"] if self.problema.tipo == 'min' else -1 * solucion['costo']
+        print(f'-> El costo esperado al aplicar dicha politica es: {costo}')
 
     def start(self):
         while True:
             opcion = self.get_opcion()
-            metodo = self.metodos[opcion](self.problema.m, self.problema.k, self.problema.matrices_decision)
+            metodo = self.metodos[opcion](self.problema.m, self.problema.k,
+                                          self.problema.matrices_decision, tipo=self.problema.tipo)
             solucion = metodo.resolver()
             self.mostrar_solucion(solucion)
             if not confirmacion('¿Desea resolver por otro método?'):

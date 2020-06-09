@@ -5,11 +5,12 @@ from utils.Functions import check_int, confirmacion, check_index
 
 
 class PMD:
-    def __init__(self, m: int, k: int, matrices_decision: Dict = None):
+    def __init__(self, m: int, k: int, matrices_decision: Dict = None, tipo: str = 'min'):
         self.m = m
         self.k = k
         self.politicas = []
         self.costos = {}
+        self.tipo = tipo
         if matrices_decision:
             self.matrices_decision = matrices_decision
         else:
@@ -43,7 +44,7 @@ class PMD:
 
     def matriz_decision_k(self, k: int) -> None:
         disponible = self.get_disponible(k)
-        matriz_k = MatrizDecision(k, disponible)
+        matriz_k = MatrizDecision(k, disponible, tipo=self.tipo)
         matriz_k.set_matriz(self.m)
         self.matrices_decision[k] = matriz_k
 

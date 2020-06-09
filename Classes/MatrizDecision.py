@@ -3,8 +3,9 @@ from utils.Functions import check_float, confirmacion
 
 
 class MatrizDecision:
-    def __init__(self, k: int, estados: List):
+    def __init__(self, k: int, estados: List, tipo: str = 'min'):
         self.k = k
+        self.tipo = tipo
         self.estados = estados
         self.matriz = []
         self.costos = {}
@@ -18,7 +19,7 @@ class MatrizDecision:
                 continue
             else:
                 break
-        return costo
+        return costo if self.tipo == 'min' else -1 * costo
 
     def set_matriz(self, m: int) -> None:
         for i in self.estados:
@@ -39,7 +40,7 @@ class MatrizDecision:
                     continue
                 costo = self.get_costo(i)
                 print(f'Los valores ingresados para el estado {i} son: {row}')
-                print(f'El costo ingresado es: {costo}')
+                print(f'El costo ingresado es: {costo if self.tipo == "min" else -1 * costo}')
                 if confirmacion():
                     break
             self.matriz.append(row)

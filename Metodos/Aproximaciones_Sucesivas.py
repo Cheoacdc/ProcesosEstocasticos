@@ -5,8 +5,8 @@ import numpy as np
 
 
 class AproximacionesSucesivas(PMD):
-    def __init__(self, m: int, k: int, matrices_decision: Dict = None):
-        super().__init__(m, k, matrices_decision)
+    def __init__(self, m: int, k: int, matrices_decision: Dict = None, tipo: str = 'min'):
+        super().__init__(m, k, matrices_decision, tipo)
         self.matriz_de_coeficientes = []
         self.variables = [{'name': f'V{i}', 'value': 0} for i in range(0, self.m + 1)]
         self.get_costos()
@@ -85,7 +85,8 @@ class AproximacionesSucesivas(PMD):
             print(f'\nDespués de la iteración {i}:')
             print(f'\tPolítica: {self.politica}')
             costo = self.matriz_politica["costo_esperado"]
-            print(f'\tCosto esperado: {costo}')
+            signo = 1 if self.tipo == 'min' else -1
+            print(f'\tCosto esperado: {signo * costo}')
 
             new_vs = [self.variables[i]['value'] for i in range(0, len(self.variables))]
             diffs = np.subtract(new_vs, last_vs)
